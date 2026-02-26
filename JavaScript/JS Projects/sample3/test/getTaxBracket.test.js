@@ -15,13 +15,21 @@ describe("getTaxBracket function", () => {
     expect(getTaxBracket(40000)).toBe("15%");
   });
 
-  test("should return 'Invalid salary' for negative salary", () => {
-    expect(getTaxBracket(-5000)).toBe("Invalid salary");
+  test("should return 'Invalid input. Please enter a valid salary.' for negative salary", () => {
+    expect(() => getTaxBracket(-5000)).toThrow(
+      "Invalid input. Please enter a valid salary.",
+    );
   });
 
-  test("should return 'Invalid salary' for non-numeric input", () => {
-    expect(getTaxBracket("abc")).toBe("Invalid salary");
-    expect(getTaxBracket(null)).toBe("Invalid salary");
-    expect(getTaxBracket(undefined)).toBe("Invalid salary");
+  test("should return 'Invalid input. Please enter a valid salary.' for non-numeric input", () => {
+    expect(() => getTaxBracket("abc")).toThrow(
+      "Invalid input. Please enter a valid salary.",
+    );
+    expect(() => getTaxBracket(null)).toThrow(
+      "Invalid input. Please enter a valid salary.",
+    );
+    expect(() => getTaxBracket(undefined)).toThrow(
+      "Invalid input. Please enter a valid salary.",
+    );
   });
 });

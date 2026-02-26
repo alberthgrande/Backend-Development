@@ -5,14 +5,15 @@ function calculateTax(salary) {
 
   let tax = 0;
 
-  if (salary > 0) {
-    tax += Math.min(salary, 10000) * 0.05; // 5% for the first $10,000
+  // First 10,000 → 5%
+  tax += Math.min(salary, 10000) * 0.05; // 5%
+
+  // Next 20,000 (10,001–30,000) → 10%
+  if (salary > 10000) {
+    tax += Math.min(salary - 10000, 20000) * 0.1; // 10%
   }
 
-  if (salary > 100000) {
-    tax += Math.min(salary - 100000, 20000) * 0.1; // 10% for the next $20,000
-  }
-
+  // Above 30,000 → 15%
   if (salary > 30000) {
     tax += Math.min(salary - 30000) * 0.15; // 15%
   }

@@ -7,7 +7,7 @@ async function main() {
     const salaryInput = Number(input);
 
     if (!Number.isFinite(salaryInput) || salaryInput < 0) {
-      console.error("Invalid input. Please enter a valid salary.");
+      console.error("Invalid salary");
       process.exit(1);
     }
 
