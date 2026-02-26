@@ -1,5 +1,5 @@
 const { askQuestion } = require("./helper");
-const { salaryRange } = require("./salaryRange");
+const salaryRange = require("./salaryRange");
 
 async function main() {
   try {
