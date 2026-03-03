@@ -1,0 +1,16 @@
+{
+  "name": "project7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "assessment5.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
