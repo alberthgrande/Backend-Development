@@ -23,7 +23,7 @@ export default function Navbar() {
               Login
             </Link>
             <Link to="/auth" className="btn btn-primary">
-              SIgn Up
+              Sign Up
             </Link>
           </div>
         </div>

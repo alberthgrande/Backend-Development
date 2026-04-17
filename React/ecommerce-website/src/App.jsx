@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Checkout from "./pages/Checkout";
+import Navbar from "./components/Navbar";
 import "./App.css";
-import Navbar from "./components/NavBar";
 
 function App() {
   return (
