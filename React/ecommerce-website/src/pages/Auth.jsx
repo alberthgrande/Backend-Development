@@ -1,15 +1,18 @@
-import { useContext, useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Auth() {
-  const [mode, setMode] = useState("signup");
-  const [error, setError] = useState(null);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const { signUp, login, user, logout } = useContext(AuthContext);
+  const initialMode = searchParams.get("mode") || "signup";
+
+  const [mode, setMode] = useState(initialMode);
+  const [error, setError] = useState(null);
+
+  const { signUp, login } = useAuth();
 
   const {
     register,
@@ -17,8 +20,15 @@ export default function Auth() {
     formState: { errors },
   } = useForm();
 
+  // keep mode in sync if URL changes
+  useEffect(() => {
+    const urlMode = searchParams.get("mode") || "signup";
+    setMode(urlMode);
+  }, [searchParams]);
+
   function onSubmit(data) {
     setError(null);
+
     let result;
     if (mode === "signup") {
       result = signUp(data.email, data.password);
@@ -33,17 +43,22 @@ export default function Auth() {
     }
   }
 
+  function switchMode(newMode) {
+    setMode(newMode);
+    setSearchParams({ mode: newMode });
+  }
+
   return (
     <div className="page">
       <div className="container">
         <div className="auth-container">
-          {user && <p>User logged in: {user.email}</p>}
-          <button onClick={() => logout()}>Logout</button>
           <h1 className="page-title">
             {mode === "signup" ? "Sign Up" : "Login"}
           </h1>
+
           <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
             {error && <div className="error-message">{error}</div>}
+
             <div className="form-group">
               <label className="form-label" htmlFor="email">
                 Email
@@ -51,13 +66,16 @@ export default function Auth() {
                   className="form-input"
                   id="email"
                   type="email"
-                  {...register("email", { required: "Email is required" })}
+                  {...register("email", {
+                    required: "Email is required",
+                  })}
                 />
               </label>
               {errors.email && (
                 <span className="form-error">{errors.email.message}</span>
               )}
             </div>
+
             <div className="form-group">
               <label className="form-label" htmlFor="password">
                 Password
@@ -88,14 +106,17 @@ export default function Auth() {
             {mode === "signup" ? (
               <p>
                 Already have an account?{" "}
-                <span className="auth-link" onClick={() => setMode("login")}>
+                <span className="auth-link" onClick={() => switchMode("login")}>
                   Login
                 </span>
               </p>
             ) : (
               <p>
                 Don't have an account?{" "}
-                <span className="auth-link" onClick={() => setMode("signup")}>
+                <span
+                  className="auth-link"
+                  onClick={() => switchMode("signup")}
+                >
                   Sign up
                 </span>
               </p>
