@@ -1,88 +1,16 @@
 import { useState } from "react";
 import "./App.css";
-
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <button
-      onClick={() => {
-        setCount((prev) => prev + 1);
-      }}
-    >
-      Count: {count}
-    </button>
-  );
-}
-
-function Greeting({ name, age }) {
-  return (
-    <h1>
-      Hello {name}! You are {age} years old.
-    </h1>
-  );
-}
+import { Attributes } from "./components/Attributes.jsx";
+import { Expressions } from "./components/Expressions.jsx";
+import { Conditions } from "./components/Conditions.jsx";
 
 function App() {
-  //map() in React
-  const fruitList = ["banana", "apple", "orange"];
-  //map() with Objects
-  const users = [
-    { id: 1, name: "John", age: 30 },
-    { id: 2, name: "Jane", age: 25 },
-    { id: 3, name: "Bob", age: 35 },
-  ];
-
   return (
     <div className="App">
       <div>
-        <h1>map() with Objects</h1>
-
-        <ul>
-          {users.map((user) => (
-            <li key={user.id}>
-              <table width="100%" border="1">
-                <tr>
-                  <td width="50%">{user.name}</td>
-                  <td width="50%">{user.age}</td>
-                </tr>
-              </table>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h1>map() in React</h1>
-
-        <ul>
-          {fruitList.map((fruit) => (
-            <li key={fruit}>{fruit}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h1>map() Parameters</h1>
-        <ul>
-          {fruitList.map((fruit, index, array) => {
-            return (
-              <li key={fruit}>
-                Name: {fruit}, Index: {index}, Array: {array.join(", ")},
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-
-      <div>
-        <h1>Props Destructuring</h1>
-        <Greeting name={"Alberth"} age={27} />
-      </div>
-
-      <div>
-        <h1>useState Hook Destructuring</h1>
-        <Counter />
+        <Expressions />
+        <Attributes />
+        <Conditions />
       </div>
     </div>
   );
